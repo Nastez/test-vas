@@ -1,0 +1,11 @@
+.wrapper {
+    width: 1000px;
+    height: 500px;
+}
+
+.preview {
+    width: 50%;
+    height: 50%;
+    border: 1px solid blue;
+    text-align: center;
+}
