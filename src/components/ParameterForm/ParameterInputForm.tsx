@@ -1,41 +1,73 @@
 import {Field, Form, Formik, FormikHelpers} from 'formik'
 import React from 'react'
+import {useDispatch} from 'react-redux'
+import {actions} from '../../redux/preview-reducer'
 
 const ParameterInputForm: React.FC = () => {
 
     type PropType = {
-        Illustration: string,
+        illustrationLink: string,
         text: string,
-        fill: string
+        colorFill: string,
+        gradientFill: string
+    }
+
+    const dispatch = useDispatch()
+
+    const addNewText = (text: string) => {
+        dispatch(actions.setText(text))
+    }
+
+    const addImgLink = (imgLink: string) => {
+        dispatch(actions.setImgLink(imgLink))
+    }
+
+    const addColorFill = (colorFill: string) => {
+        dispatch(actions.setColorFill(colorFill))
+    }
+
+    const addGradientFill = (gradientFill: string) => {
+        dispatch(actions.setGradientFill(gradientFill))
     }
 
     return <div>
         <Formik
             initialValues={{
-                Illustration: '',
+                illustrationLink: '',
                 text: '',
-                fill: ''
+                colorFill: '',
+                gradientFill: ''
             }}
             onSubmit={(
                 values: PropType,
                 {setSubmitting}: FormikHelpers<PropType>
             ) => {
-                    alert(JSON.stringify(values, null, 2))
-                    setSubmitting(false)
+                addNewText(values.text)
+                addImgLink(values.illustrationLink)
+                addColorFill(values.colorFill)
+                addGradientFill(values.gradientFill)
+                setSubmitting(false)
             }}
         >
             <Form>
-                <label htmlFor="Illustration">Illustration</label>
-                <Field id="Illustration" name="Illustration" placeholder="Insert the link"/>
+                <label htmlFor="illustrationLink">Illustration</label>
+                <Field id="illustrationLink" name="illustrationLink" placeholder="Insert the link"/>
 
                 <label htmlFor="text">Text</label>
                 <Field id="text" name="text" placeholder="Enter text"/>
 
-                <label htmlFor="fill">Fill</label>
+                <label htmlFor="colorFill">Fill Color</label>
                 <Field
-                    id="fill"
-                    name="fill"
-                    placeholder="Choose a fill color"
+                    id="colorFill"
+                    name="colorFill"
+                    placeholder="Choose a color fill"
+                />
+
+                <label htmlFor="gradientFill">Fill Gradient</label>
+                <Field
+                    id="gradientFill"
+                    name="gradientFill"
+                    placeholder="Choose a gradient fill"
                 />
 
                 <button type="submit">Submit</button>

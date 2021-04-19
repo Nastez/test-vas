@@ -1,7 +1,8 @@
 import {combineReducers, createStore} from 'redux'
+import previewReducer from './preview-reducer'
 
 let rootReducer = combineReducers({
-
+    preview: previewReducer
 })
 
 type RootReducerType = typeof rootReducer
