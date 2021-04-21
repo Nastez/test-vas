@@ -5,7 +5,10 @@ import s from './Preview.module.css'
 
 const Preview: React.FC = () => {
 
+
+
     return <>
+
         <div className={s.previewImg}><PreviewImg/></div>
         <div className={s.previewText}><PreviewText/></div>
     </>

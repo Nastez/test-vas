@@ -1,5 +1,5 @@
 import './App.module.css'
-import React, {useRef} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import Preview from './components/Preview/Preview'
 import s from './App.module.css'
 import ParameterInputForm from './components/ParameterForm/ParameterInputForm'
@@ -9,11 +9,38 @@ import domtoimage from 'dom-to-image'
 import {saveAs} from 'file-saver'
 
 const App: React.FC = () => {
-
+    console.log('Render')
     const colorFill = useSelector(getColorFill)
     const gradientFill = useSelector(getGradientFill)
 
     const captureRef = useRef(null)
+
+    const [isReadyToCopy, setReadyToCopy] = useState(false)
+
+    const copyToClip = useCallback((str: string) => {
+        const listener = (e: ClipboardEvent) => {
+            e.clipboardData!.setData('text/jsx', str)
+            e.clipboardData!.setData('text/plain', str)
+            e.preventDefault()
+        }
+        return {'listener': listener}
+    }, [])
+
+    useEffect(() => {
+        const markup: HTMLElement = captureRef.current!
+        if (isReadyToCopy) {
+            document.addEventListener('copy', copyToClip(markup.innerHTML).listener)
+            document.execCommand('copy')
+        }
+        return () => {
+            document.removeEventListener('copy', copyToClip(markup.innerHTML).listener)
+            setReadyToCopy(false)
+        }
+    }, [isReadyToCopy])
+
+    const saveInHTML = () => {
+        setReadyToCopy(true)
+    }
 
     const saveInPNG = () => {
         const image = captureRef.current
@@ -22,7 +49,6 @@ const App: React.FC = () => {
             .then(function (blob) {
                 saveAs(blob, 'my-node.png')
             })
-
     }
 
     return (
@@ -37,7 +63,7 @@ const App: React.FC = () => {
             <ParameterInputForm/>
             <div>
                 <button onClick={saveInPNG}>Save in png</button>
-                <button>Copy (html or jsx)</button>
+                <button onClick={saveInHTML}>Copy html</button>
                 <button>Copy in json</button>
             </div>
         </div>
