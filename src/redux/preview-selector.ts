@@ -16,6 +16,10 @@ export const getGradientFill = (state: AppStateType) => {
     return state.preview.gradientFill
 }
 
+export const getGivenLink = (state: AppStateType) => {
+    return state.preview.givenLink
+}
+
 export const getPreviewData = (state: AppStateType) => {
     return state.preview
 }

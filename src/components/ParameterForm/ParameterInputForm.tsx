@@ -9,7 +9,8 @@ const ParameterInputForm: React.FC = () => {
         illustrationLink: string,
         text: string,
         colorFill: string,
-        gradientFill: string
+        gradientFill: string,
+        givenLink: string
     }
 
     const dispatch = useDispatch()
@@ -30,13 +31,18 @@ const ParameterInputForm: React.FC = () => {
         dispatch(actions.setGradientFill(gradientFill))
     }
 
+    const addOnClickLink = (givenLink: string) => {
+        dispatch(actions.setOnClickLink(givenLink))
+    }
+
     return <div>
         <Formik
             initialValues={{
                 illustrationLink: '',
                 text: '',
                 colorFill: '',
-                gradientFill: ''
+                gradientFill: '',
+                givenLink: ''
             }}
             onSubmit={(
                 values: PropType,
@@ -46,6 +52,7 @@ const ParameterInputForm: React.FC = () => {
                 addImgLink(values.illustrationLink)
                 addColorFill(values.colorFill)
                 addGradientFill(values.gradientFill)
+                addOnClickLink(values.givenLink)
                 setSubmitting(false)
             }}
         >
@@ -68,6 +75,12 @@ const ParameterInputForm: React.FC = () => {
                     id="gradientFill"
                     name="gradientFill"
                     placeholder="Choose a gradient fill"
+                />
+                <label htmlFor="givenLink">Given Link</label>
+                <Field
+                    id="givenLink"
+                    name="givenLink"
+                    placeholder="Set link"
                 />
 
                 <button type="submit">Submit</button>

@@ -4,7 +4,8 @@ let initialState = {
     imgLink: '',
     text: '',
     colorFill: '',
-    gradientFill: ''
+    gradientFill: '',
+    givenLink: ''
 }
 
 const previewReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
@@ -26,6 +27,10 @@ const previewReducer = (state = initialState, action: ActionsTypes): InitialStat
             return {
                 ...state, gradientFill: action.gradientFill
             }
+        case 'PREVIEW/SET_ONCLICK_LINK':
+            return {
+                ...state, givenLink: action.givenLink
+            }
         default:
             return state
     }
@@ -35,7 +40,8 @@ export const actions = {
     setImgLink: (imgLink: string) => ({type: 'PREVIEW/SET_IMG_LINK', imgLink} as const),
     setText: (text: string) => ({type: 'PREVIEW/SET_TEXT', text} as const),
     setColorFill: (colorFill: string) => ({type: 'PREVIEW/SET_COLOR_FILL', colorFill} as const),
-    setGradientFill: (gradientFill: string) => ({type: 'PREVIEW/SET_GRADIENT_FILL', gradientFill} as const)
+    setGradientFill: (gradientFill: string) => ({type: 'PREVIEW/SET_GRADIENT_FILL', gradientFill} as const),
+    setOnClickLink: (givenLink: string) => ({type: 'PREVIEW/SET_ONCLICK_LINK', givenLink} as const)
 }
 
 export default previewReducer
