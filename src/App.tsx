@@ -4,7 +4,7 @@ import Preview from './components/Preview/Preview'
 import s from './App.module.css'
 import ParameterInputForm from './components/ParameterForm/ParameterInputForm'
 import {useSelector} from 'react-redux'
-import {getColorFill, getGradientFill} from './redux/preview-selector'
+import {getColorFill, getGradientFill, getPreviewData} from './redux/preview-selector'
 import domtoimage from 'dom-to-image'
 import {saveAs} from 'file-saver'
 
@@ -13,13 +13,16 @@ const App: React.FC = () => {
     const colorFill = useSelector(getColorFill)
     const gradientFill = useSelector(getGradientFill)
 
+    const previewData = useSelector(getPreviewData)
+
     const captureRef = useRef(null)
 
-    const [isReadyToCopy, setReadyToCopy] = useState(false)
+    const [isReadyToCopyHTML, setReadyToCopyHTML] = useState(false)
+    const [isReadyToCopyJSON, setReadyToCopyJSON] = useState(false)
 
     const copyToClip = useCallback((str: string) => {
         const listener = (e: ClipboardEvent) => {
-            e.clipboardData!.setData('text/jsx', str)
+            e.clipboardData!.setData('text/html', str)
             e.clipboardData!.setData('text/plain', str)
             e.preventDefault()
         }
@@ -28,28 +31,43 @@ const App: React.FC = () => {
 
     useEffect(() => {
         const markup: HTMLElement = captureRef.current!
-        if (isReadyToCopy) {
+        if (isReadyToCopyHTML) {
             document.addEventListener('copy', copyToClip(markup.innerHTML).listener)
             document.execCommand('copy')
         }
         return () => {
             document.removeEventListener('copy', copyToClip(markup.innerHTML).listener)
-            setReadyToCopy(false)
+            setReadyToCopyHTML(false)
         }
-    }, [isReadyToCopy])
+    }, [isReadyToCopyHTML])
+
+    useEffect(() => {
+        if (isReadyToCopyJSON) {
+            document.addEventListener('copy', copyToClip(JSON.stringify(previewData)).listener)
+            document.execCommand('copy')
+        }
+        return () => {
+            document.removeEventListener('copy', copyToClip(JSON.stringify(previewData)).listener)
+            setReadyToCopyJSON(false)
+        }
+    }, [isReadyToCopyJSON])
 
     const saveInHTML = () => {
-        setReadyToCopy(true)
+        setReadyToCopyHTML(true)
     }
 
     const saveInPNG = () => {
         const image = captureRef.current
-
         domtoimage.toBlob(image!)
             .then(function (blob) {
                 saveAs(blob, 'my-node.png')
             })
     }
+
+    const saveInJSON = () => {
+        setReadyToCopyJSON(true)
+    }
+
 
     return (
         <div className={s.wrapper}>
@@ -64,7 +82,7 @@ const App: React.FC = () => {
             <div>
                 <button onClick={saveInPNG}>Save in png</button>
                 <button onClick={saveInHTML}>Copy html</button>
-                <button>Copy in json</button>
+                <button onClick={saveInJSON}>Copy in JSON</button>
             </div>
         </div>
     )

@@ -15,3 +15,7 @@ export const getColorFill = (state: AppStateType) => {
 export const getGradientFill = (state: AppStateType) => {
     return state.preview.gradientFill
 }
+
+export const getPreviewData = (state: AppStateType) => {
+    return state.preview
+}
