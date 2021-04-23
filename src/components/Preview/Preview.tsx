@@ -9,7 +9,7 @@ const Preview: React.FC = () => {
     return <>
         <div className={s.previewImg}><PreviewImg/></div>
         <div className={s.previewText}><PreviewText/></div>
-        <PreviewLinkForClick/>
+        <div><PreviewLinkForClick/></div>
         <div><PreviewColorFill/></div>
     </>
 }

@@ -8,8 +8,8 @@ const ParameterInputForm: React.FC = () => {
     type PropType = {
         illustrationLink: string,
         text: string,
-        colorFill: string,
-        gradientFill: string,
+        firstColor: string,
+        secondColor: string,
         givenLink: string
     }
 
@@ -23,12 +23,12 @@ const ParameterInputForm: React.FC = () => {
         dispatch(actions.setImgLink(imgLink))
     }
 
-    const addColorFill = (colorFill: string) => {
-        dispatch(actions.setColorFill(colorFill))
+    const addFirstColor = (firstColor: string) => {
+        dispatch(actions.setFirstColor(firstColor))
     }
 
-    const addGradientFill = (gradientFill: string) => {
-        dispatch(actions.setGradientFill(gradientFill))
+    const addSecondColor = (secondColor: string) => {
+        dispatch(actions.setSecondColor(secondColor))
     }
 
     const addOnClickLink = (givenLink: string) => {
@@ -40,8 +40,8 @@ const ParameterInputForm: React.FC = () => {
             initialValues={{
                 illustrationLink: '',
                 text: '',
-                colorFill: '',
-                gradientFill: '',
+                firstColor: '',
+                secondColor: '',
                 givenLink: ''
             }}
             onSubmit={(
@@ -50,8 +50,8 @@ const ParameterInputForm: React.FC = () => {
             ) => {
                 addNewText(values.text)
                 addImgLink(values.illustrationLink)
-                addColorFill(values.colorFill)
-                addGradientFill(values.gradientFill)
+                addFirstColor(values.firstColor)
+                addSecondColor(values.secondColor)
                 addOnClickLink(values.givenLink)
                 setSubmitting(false)
             }}
@@ -63,17 +63,17 @@ const ParameterInputForm: React.FC = () => {
                 <label htmlFor="text">Text</label>
                 <Field id="text" name="text" placeholder="Enter text"/>
 
-                <label htmlFor="colorFill">Fill Color</label>
+                <label htmlFor="firstColor">Fill Color</label>
                 <Field
-                    id="colorFill"
-                    name="colorFill"
+                    id="firstColor"
+                    name="firstColor"
                     placeholder="Choose a color fill"
                 />
 
-                <label htmlFor="gradientFill">Fill Gradient</label>
+                <label htmlFor="secondColor">Fill Gradient</label>
                 <Field
-                    id="gradientFill"
-                    name="gradientFill"
+                    id="secondColor"
+                    name="secondColor"
                     placeholder="Choose a gradient fill"
                 />
                 <label htmlFor="givenLink">Given Link</label>

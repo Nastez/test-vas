@@ -8,12 +8,12 @@ export const getImgLink = (state: AppStateType) => {
     return state.preview.imgLink
 }
 
-export const getColorFill = (state: AppStateType) => {
-    return state.preview.colorFill
+export const getFirstColor = (state: AppStateType) => {
+    return state.preview.firstColor
 }
 
-export const getGradientFill = (state: AppStateType) => {
-    return state.preview.gradientFill
+export const getSecondColor = (state: AppStateType) => {
+    return state.preview.secondColor
 }
 
 export const getGivenLink = (state: AppStateType) => {

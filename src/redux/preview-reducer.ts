@@ -3,8 +3,8 @@ import {InferActionsTypes} from './redux-store'
 let initialState = {
     imgLink: '',
     text: '',
-    colorFill: '',
-    gradientFill: '',
+    firstColor: '',
+    secondColor: '',
     givenLink: ''
 }
 
@@ -19,13 +19,13 @@ const previewReducer = (state = initialState, action: ActionsTypes): InitialStat
             return {
                 ...state, text: action.text
             }
-        case 'PREVIEW/SET_COLOR_FILL':
+        case 'PREVIEW/SET_FIRST_COLOR':
             return {
-                ...state, colorFill: action.colorFill
+                ...state, firstColor: action.firstColor
             }
-        case 'PREVIEW/SET_GRADIENT_FILL':
+        case 'PREVIEW/SET_SECOND_COLOR':
             return {
-                ...state, gradientFill: action.gradientFill
+                ...state, secondColor: action.secondColor
             }
         case 'PREVIEW/SET_ONCLICK_LINK':
             return {
@@ -39,8 +39,8 @@ const previewReducer = (state = initialState, action: ActionsTypes): InitialStat
 export const actions = {
     setImgLink: (imgLink: string) => ({type: 'PREVIEW/SET_IMG_LINK', imgLink} as const),
     setText: (text: string) => ({type: 'PREVIEW/SET_TEXT', text} as const),
-    setColorFill: (colorFill: string) => ({type: 'PREVIEW/SET_COLOR_FILL', colorFill} as const),
-    setGradientFill: (gradientFill: string) => ({type: 'PREVIEW/SET_GRADIENT_FILL', gradientFill} as const),
+    setFirstColor: (firstColor: string) => ({type: 'PREVIEW/SET_FIRST_COLOR', firstColor} as const),
+    setSecondColor: (secondColor: string) => ({type: 'PREVIEW/SET_SECOND_COLOR', secondColor} as const),
     setOnClickLink: (givenLink: string) => ({type: 'PREVIEW/SET_ONCLICK_LINK', givenLink} as const)
 }
 
