@@ -4,15 +4,14 @@ import Preview from './components/Preview/Preview'
 import s from './App.module.css'
 import ParameterInputForm from './components/ParameterForm/ParameterInputForm'
 import {useSelector} from 'react-redux'
-import {getFirstColor, getGivenLink, getPreviewData, getSecondColor} from './redux/preview-selector'
+import {getFirstColor, getLinkForRedirect, getPreviewData, getSecondColor} from './redux/preview-selector'
 import {saveAs} from 'file-saver'
 import * as htmlToImage from 'html-to-image'
-import {Button} from 'antd'
 
 const App: React.FC = () => {
     const firstColor = useSelector(getFirstColor)
     const secondColor = useSelector(getSecondColor)
-    const givenLink = useSelector(getGivenLink)
+    const linkForRedirect = useSelector(getLinkForRedirect)
     const previewData = useSelector(getPreviewData)
 
     const captureRef = useRef(null)
@@ -48,7 +47,7 @@ const App: React.FC = () => {
                 setReadyToCopyHTML(false)
             }
         }
-    }, [isReadyToCopyHTML])
+    }, [isReadyToCopyHTML, copyToClip])
 
     useEffect(() => {
         if (isReadyToCopyJSON) {
@@ -59,31 +58,19 @@ const App: React.FC = () => {
             document.removeEventListener('copy', copyToClip(JSON.stringify(previewData)).listener)
             setReadyToCopyJSON(false)
         }
-    }, [previewData, isReadyToCopyJSON])
+    }, [previewData, isReadyToCopyJSON, copyToClip])
 
     useEffect(() => {
         if (isReadyToRedirect) {
-            window.open(`${givenLink}`, '_blank')
+            window.open(`${linkForRedirect}`, '_blank')
         }
 
         setReadyToRedirect(false)
-    }, [isReadyToRedirect, givenLink])
+    }, [isReadyToRedirect, linkForRedirect])
 
     const saveInHTML = () => {
         setReadyToCopyHTML(true)
     }
-
-    /*   const saveInPNG = () => {
-           const image: HTMLDivElement= captureRef.current!
-           if (image === null) {
-               console.log('Image is null')
-           } else {
-               domtoimage.toBlob(image)
-                   .then(function (blob) {
-                       saveAs(blob, 'my-node.png')
-                   })
-           }
-       }*/
 
     const saveInPNG = () => {
         const image: HTMLDivElement = captureRef.current!

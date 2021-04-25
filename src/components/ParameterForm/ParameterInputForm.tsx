@@ -11,7 +11,7 @@ const ParameterInputForm: React.FC = () => {
         text: string,
         firstColor: string,
         secondColor: string,
-        givenLink: string
+        linkForRedirect: string
     }
 
     const dispatch = useDispatch()
@@ -32,8 +32,8 @@ const ParameterInputForm: React.FC = () => {
         dispatch(actions.setSecondColor(secondColor))
     }
 
-    const addOnClickLink = (givenLink: string) => {
-        dispatch(actions.setOnClickLink(givenLink))
+    const addOnClickLink = (linkForRedirect: string) => {
+        dispatch(actions.setOnClickLink(linkForRedirect))
     }
 
     return <div>
@@ -43,7 +43,7 @@ const ParameterInputForm: React.FC = () => {
                 text: '',
                 firstColor: '',
                 secondColor: '',
-                givenLink: ''
+                linkForRedirect: ''
             }}
             onSubmit={(
                 values: PropType,
@@ -53,37 +53,30 @@ const ParameterInputForm: React.FC = () => {
                 addImgLink(values.illustrationLink)
                 addFirstColor(values.firstColor)
                 addSecondColor(values.secondColor)
-                addOnClickLink(values.givenLink)
+                addOnClickLink(values.linkForRedirect)
                 setSubmitting(false)
             }}
         >
             <Form className={s.box}>
-                {/*<label htmlFor="illustrationLink">Illustration</label>*/}
                 <Field id="illustrationLink" name="illustrationLink" placeholder="Set illustration link"
                        className={s.fieldBox}/>
-
-                {/*<label htmlFor="text">Text</label>*/}
                 <Field id="text" name="text" placeholder="Enter text" className={s.fieldBox}/>
-
-                {/*<label htmlFor="firstColor">First Color</label>*/}
                 <Field
                     id="firstColor"
                     name="firstColor"
-                    placeholder="Choose a color"
+                    placeholder="Second a first color"
                     className={s.fieldBox}
                 />
-               {/* <label htmlFor="secondColor">Second Color</label>*/}
                 <Field
                     id="secondColor"
                     name="secondColor"
-                    placeholder="Choose a color"
+                    placeholder="Set a second color"
                     className={s.fieldBox}
                 />
-                {/*<label htmlFor="givenLink">Link for Redirect</label>*/}
                 <Field
-                    id="givenLink"
-                    name="givenLink"
-                    placeholder="Set link for Redirect"
+                    id="linkForRedirect"
+                    name="linkForRedirect"
+                    placeholder="Set redirect link"
                     className={s.fieldBox}
                 />
                 <button type="submit" className={s.buttonProp}>Submit</button>

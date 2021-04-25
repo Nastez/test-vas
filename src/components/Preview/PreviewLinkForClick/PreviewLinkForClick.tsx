@@ -1,10 +1,10 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import {getGivenLink} from '../../../redux/preview-selector'
+import {getLinkForRedirect} from '../../../redux/preview-selector'
 import s from './PreviewLinkForClick.module.css'
 
 const PreviewLinkForClick: React.FC = (props) => {
-    const link = useSelector(getGivenLink)
+    const link = useSelector(getLinkForRedirect)
     return <div className={s.linkForClick}>
         {link}
     </div>

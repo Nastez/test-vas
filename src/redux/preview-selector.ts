@@ -16,8 +16,8 @@ export const getSecondColor = (state: AppStateType) => {
     return state.preview.secondColor
 }
 
-export const getGivenLink = (state: AppStateType) => {
-    return state.preview.givenLink
+export const getLinkForRedirect = (state: AppStateType) => {
+    return state.preview.linkForRedirect
 }
 
 export const getPreviewData = (state: AppStateType) => {

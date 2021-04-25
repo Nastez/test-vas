@@ -5,7 +5,7 @@ let initialState = {
     text: '',
     firstColor: '',
     secondColor: '',
-    givenLink: ''
+    linkForRedirect: ''
 }
 
 const previewReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
@@ -14,7 +14,6 @@ const previewReducer = (state = initialState, action: ActionsTypes): InitialStat
             return {
                 ...state, imgLink: action.imgLink
             }
-
         case 'PREVIEW/SET_TEXT':
             return {
                 ...state, text: action.text
@@ -29,7 +28,7 @@ const previewReducer = (state = initialState, action: ActionsTypes): InitialStat
             }
         case 'PREVIEW/SET_ONCLICK_LINK':
             return {
-                ...state, givenLink: action.givenLink
+                ...state, linkForRedirect: action.linkForRedirect
             }
         default:
             return state
@@ -41,7 +40,7 @@ export const actions = {
     setText: (text: string) => ({type: 'PREVIEW/SET_TEXT', text} as const),
     setFirstColor: (firstColor: string) => ({type: 'PREVIEW/SET_FIRST_COLOR', firstColor} as const),
     setSecondColor: (secondColor: string) => ({type: 'PREVIEW/SET_SECOND_COLOR', secondColor} as const),
-    setOnClickLink: (givenLink: string) => ({type: 'PREVIEW/SET_ONCLICK_LINK', givenLink} as const)
+    setOnClickLink: (linkForRedirect: string) => ({type: 'PREVIEW/SET_ONCLICK_LINK', linkForRedirect} as const)
 }
 
 export default previewReducer
