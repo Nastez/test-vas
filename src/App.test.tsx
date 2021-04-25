@@ -6,6 +6,7 @@ import Enzyme from 'enzyme'
 
 Enzyme.configure({adapter: new Adapter()})
 
+
 describe('test suite for useSelector and useDispatch', () => {
     const useSelectorMock = jest.spyOn(reactRedux, 'useSelector')
     const useDispatchMock = jest.spyOn(reactRedux, 'useDispatch')
@@ -26,7 +27,7 @@ describe('test suite for useSelector and useDispatch', () => {
 })
 
 describe('Test button', () => {
-    it('Test click event', () => {
+    test('Click event', () => {
         const mockCallBack = jest.fn()
         const button = shallow((<button onClick={mockCallBack}>Ok!</button>))
         button.find('button').simulate('click')
