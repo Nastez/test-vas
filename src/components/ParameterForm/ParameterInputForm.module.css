@@ -1,0 +1,55 @@
+.box {
+    display: grid;
+    grid-gap: 0.5vw;
+}
+
+.fieldBox {
+    border: 1px solid #A9A9A9;
+    width: 15vw;
+    height: 1vw;
+}
+
+.buttonProp {
+    background-color: #707070;
+    color: #FFFFFF;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    width: 5vw;
+    height: 1.5vw;
+}
+
+@media (max-width: 2560px) {
+    .fieldBox {
+        max-width: 210px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .fieldBox {
+        max-width: 190px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 992px) {
+    .fieldBox {
+        max-width: 180px;
+        height: 18px;
+    }
+    .buttonProp {
+        width: 60px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .fieldBox {
+        max-width: none;
+    }
+    .buttonProp {
+        width: 43px;
+        height: 20px;
+    }
+}

@@ -4,4 +4,36 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    max-lines: 3;
 }
+
+.textParams {
+    color: #000000;
+    font-size: 40px;
+    margin: 0 12px 0 12px;
+}
+
+@media (max-width: 2560px) {
+    .textParams {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 1400px) {
+    .textParams {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .textParams {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 767px) {
+    .textParams {
+        font-size: 20px;
+    }
+}
+

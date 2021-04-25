@@ -1,12 +1,12 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
 import {getImgLink} from '../../../redux/preview-selector'
+import s from './PreviewImg.module.css'
 
 const PreviewImg: React.FC = () => {
-    console.log("IMGReRender")
     let imgLink = useSelector(getImgLink)
     return <div>
-        <img src={imgLink}/>
+        {imgLink !== '' && <img src={imgLink} className={s.imgParams}/>}
     </div>
 }
 

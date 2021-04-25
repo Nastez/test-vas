@@ -5,12 +5,11 @@ import s from './App.module.css'
 import ParameterInputForm from './components/ParameterForm/ParameterInputForm'
 import {useSelector} from 'react-redux'
 import {getFirstColor, getGivenLink, getPreviewData, getSecondColor} from './redux/preview-selector'
-import domToImage from 'dom-to-image'
 import {saveAs} from 'file-saver'
+import * as htmlToImage from 'html-to-image'
+import {Button} from 'antd'
 
-const TestVAS: React.FC = () => {
-    console.log('Render')
-
+const App: React.FC = () => {
     const firstColor = useSelector(getFirstColor)
     const secondColor = useSelector(getSecondColor)
     const givenLink = useSelector(getGivenLink)
@@ -74,14 +73,26 @@ const TestVAS: React.FC = () => {
         setReadyToCopyHTML(true)
     }
 
+    /*   const saveInPNG = () => {
+           const image: HTMLDivElement= captureRef.current!
+           if (image === null) {
+               console.log('Image is null')
+           } else {
+               domtoimage.toBlob(image)
+                   .then(function (blob) {
+                       saveAs(blob, 'my-node.png')
+                   })
+           }
+       }*/
+
     const saveInPNG = () => {
-        const image = captureRef.current
+        const image: HTMLDivElement = captureRef.current!
         if (image === null) {
             console.log('Image is null')
         } else {
-            domToImage.toBlob(image)
+            htmlToImage.toBlob(image)
                 .then(function (blob) {
-                    saveAs(blob, 'my-node.png')
+                    saveAs(blob!, 'my-node.png')
                 })
         }
     }
@@ -114,27 +125,26 @@ const TestVAS: React.FC = () => {
         case (firstColor === '' && secondColor !== ''):
             setColorFill(secondColor)
             break
-        default:
-            console.log('Yo-Yo')
     }
 
     return (
         <div className={s.wrapper}>
-            <div id='test'
-                 onClick={followTheLink}
+            <div onClick={followTheLink}
                  className={s.preview}
                  ref={captureRef}>
                 <Preview/>
             </div>
-            <ParameterInputForm/>
-            <div>
-                <button onClick={saveInPNG}>Save in png</button>
-                <button onClick={saveInHTML}>Copy html</button>
-                <button onClick={saveInJSON}>Copy in JSON</button>
+            <div className={s.wrapperFormAndButton}>
+                <ParameterInputForm/>
+                <div className={s.buttonsBox}>
+                    <button onClick={saveInPNG} className={s.buttonParams}>Save in png</button>
+                    <button onClick={saveInHTML} className={s.buttonParams}>Copy html</button>
+                    <button onClick={saveInJSON} className={s.buttonParams}>Copy in JSON</button>
+                </div>
             </div>
         </div>
     )
 }
 
-export default TestVAS
+export default App
 
